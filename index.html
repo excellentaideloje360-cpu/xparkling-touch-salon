@@ -1,143 +1,351 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xparkling Touch Unisex Salon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Xparkling Touch &mdash; Unisex Salon</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+  :root{
+    --ink:#141414;
+    --graphite:#1C1C1E;
+    --graphite-soft:#2A2A2D;
+    --ivory:#EEEBE4;
+    --ivory-soft:#F7F5F0;
+    --champagne:#BFA06B;
+    --champagne-bright:#D9BE8E;
+    --silver:#B9BDC4;
+    --line:rgba(238,235,228,0.14);
+    --line-dark:rgba(20,20,20,0.12);
+  }
 
-    body {
-      background: #111;
-      color: white;
-    }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important;animation-iteration-count:1 !important;transition-duration:0.001ms !important;}
+  }
 
-    header {
-      min-height: 90vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 30px;
-      background: linear-gradient(#0009, #0009),
-                  url("https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80");
-      background-size: cover;
-      background-position: center;
-    }
+  body{
+    background:var(--ivory-soft);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
+  a{color:inherit;text-decoration:none;}
+  :focus-visible{outline:2px solid var(--champagne);outline-offset:3px;}
 
-    header p {
-      font-size: 18px;
-      margin-bottom: 25px;
-    }
+  .wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
 
-    .button {
-      display: inline-block;
-      padding: 14px 25px;
-      background: #e91e63;
-      color: white;
-      text-decoration: none;
-      border-radius: 30px;
-      font-weight: bold;
-    }
+  .display{
+    font-family:'Bebas Neue', sans-serif;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+  }
 
-    section {
-      padding: 50px 20px;
-      text-align: center;
-    }
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(20,20,20,0.92);
+    backdrop-filter:blur(10px);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 32px;max-width:1160px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Bebas Neue', sans-serif;font-size:1.5rem;
+    letter-spacing:0.03em;color:var(--ivory);
+    display:flex;align-items:baseline;gap:2px;
+  }
+  .logo .x{color:var(--champagne-bright);}
+  .nav-links{display:flex;gap:34px;font-size:0.86rem;font-weight:500;color:var(--ivory);}
+  .nav-links a{position:relative;padding-bottom:3px;opacity:0.85;}
+  .nav-links a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+    background:var(--champagne-bright);transition:width 0.25s ease;
+  }
+  .nav-links a:hover{opacity:1;}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--champagne);color:var(--ink);
+    padding:10px 22px;border-radius:2px;font-size:0.84rem;font-weight:600;
+    transition:background 0.2s ease;
+  }
+  .nav-cta:hover{background:var(--champagne-bright);}
 
-    section h2 {
-      margin-bottom: 25px;
-      font-size: 30px;
-    }
+  /* HERO */
+  .hero{
+    background:var(--ink);color:var(--ivory);
+    padding:110px 32px 90px;position:relative;overflow:hidden;
+  }
+  .hero-inner{max-width:1160px;margin:0 auto;position:relative;z-index:2;}
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace;font-size:0.76rem;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--champagne-bright);
+    margin-bottom:26px;
+  }
+  .hero h1{
+    font-family:'Bebas Neue', sans-serif;
+    font-size:clamp(3.4rem, 8vw, 7.2rem);
+    line-height:0.92;letter-spacing:0.01em;
+    max-width:14ch;
+  }
+  .shimmer{
+    background:linear-gradient(100deg, var(--ivory) 30%, var(--champagne-bright) 45%, var(--ivory) 60%);
+    background-size:220% 100%;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 5s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%{background-position:200% 0;}
+    50%{background-position:-40% 0;}
+    100%{background-position:200% 0;}
+  }
+  .hero p.sub{
+    margin-top:26px;font-size:1.05rem;line-height:1.65;color:var(--silver);
+    max-width:42ch;
+  }
+  .hero-actions{margin-top:38px;display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--champagne);color:var(--ink);
+    padding:15px 30px;border-radius:2px;font-weight:600;font-size:0.92rem;
+    transition:transform 0.2s ease,background 0.2s ease;display:inline-block;
+  }
+  .btn-primary:hover{background:var(--champagne-bright);transform:translateY(-1px);}
+  .btn-ghost{
+    font-size:0.9rem;font-weight:500;color:var(--ivory);
+    border-bottom:1px solid var(--silver);padding-bottom:3px;
+  }
+  .hero-stats{
+    margin-top:64px;display:flex;gap:48px;flex-wrap:wrap;
+    padding-top:32px;border-top:1px solid var(--line);
+  }
+  .hero-stats div strong{
+    display:block;font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--champagne-bright);letter-spacing:0.02em;
+  }
+  .hero-stats div span{font-size:0.8rem;color:var(--silver);letter-spacing:0.02em;}
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
+  /* SNIP DIVIDER (signature) */
+  .snip-divider{
+    display:flex;align-items:center;gap:14px;padding:26px 32px;
+    max-width:1160px;margin:0 auto;
+  }
+  .snip-line{flex:1;height:1px;background:var(--line-dark);}
+  .snip-icon{width:20px;height:20px;flex-shrink:0;opacity:0.55;}
+  .snip-icon svg{width:100%;height:100%;}
+  .snip-icon path{stroke:var(--ink);stroke-width:1.4;fill:none;}
 
-    .card {
-      background: #222;
-      padding: 25px;
-      border-radius: 15px;
-    }
+  /* SECTION LABEL */
+  .section-label{
+    font-family:'JetBrains Mono', monospace;font-size:0.76rem;
+    letter-spacing:0.14em;text-transform:uppercase;color:var(--champagne);
+    margin-bottom:14px;
+  }
+  section{padding:80px 0;}
 
-    .card h3 {
-      margin-bottom: 10px;
-    }
+  /* SERVICES */
+  .services-head{margin-bottom:48px;}
+  .services-head h2{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:0.01em;}
+  .service-cols{display:grid;grid-template-columns:1fr 1fr;gap:0 64px;}
+  .service-col h3{
+    font-family:'JetBrains Mono', monospace;font-size:0.8rem;
+    letter-spacing:0.1em;text-transform:uppercase;color:var(--champagne);
+    padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--line-dark);
+  }
+  .service-item{
+    display:flex;align-items:baseline;gap:8px;margin-bottom:16px;
+  }
+  .service-item .name{font-weight:600;font-size:1rem;white-space:nowrap;}
+  .service-item .leader{flex:1;border-bottom:1px dotted var(--line-dark);position:relative;top:-3px;min-width:12px;}
+  .service-item .price{font-family:'JetBrains Mono', monospace;font-size:0.9rem;font-weight:500;white-space:nowrap;color:var(--graphite-soft);}
+  .service-item.wa-book{cursor:pointer;border-radius:3px;transition:background 0.2s ease,padding 0.2s ease;}
+  .service-item.wa-book:hover{background:rgba(191,160,107,0.12);padding-left:8px;padding-right:8px;margin-left:-8px;margin-right:-8px;}
+  .service-item.wa-book:hover .price{color:var(--champagne);}
 
-    .contact {
-      background: #1b1b1b;
-    }
+  /* WHY / SIGNATURE STRIP */
+  .strip{
+    background:var(--graphite);color:var(--ivory);
+  }
+  .strip-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+  }
+  .strip-item .num{
+    font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--champagne-bright);
+    letter-spacing:0.1em;margin-bottom:10px;
+  }
+  .strip-item h4{font-size:1.15rem;font-weight:600;margin-bottom:10px;}
+  .strip-item p{font-size:0.92rem;line-height:1.6;color:var(--silver);}
 
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: #000;
-      color: #aaa;
-    }
-  </style>
+  /* BOOKING / VISIT */
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:48px;}
+  .visit-block h3{
+    font-family:'JetBrains Mono', monospace;font-size:0.76rem;
+    letter-spacing:0.1em;text-transform:uppercase;color:var(--champagne);margin-bottom:14px;
+  }
+  .visit-block p{font-size:1rem;line-height:1.65;color:var(--ink);}
+  .visit-block p.muted{color:var(--graphite-soft);font-size:0.88rem;margin-top:6px;}
+
+  footer{
+    background:var(--ink);color:var(--silver);
+    padding:36px 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:0.84rem;flex-wrap:wrap;gap:12px;
+  }
+  footer .logo{font-size:1.2rem;}
+
+  .fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .fade-in.visible{opacity:1;transform:translateY(0);}
+
+  @media (max-width:840px){
+    .nav-links{display:none;}
+    .service-cols{grid-template-columns:1fr;}
+    .strip-grid{grid-template-columns:1fr;}
+    .visit-grid{grid-template-columns:1fr;gap:32px;}
+    .hero-stats{gap:32px;}
+  }
+</style>
 </head>
-
 <body>
 
-  <header>
-    <div>
-      <h1>Xparkling Touch Unisex Salon</h1>
-      <p>Look good. Feel confident. ✨</p>
-      <a class="button" href="#contact">Contact Us</a>
+<header>
+  <nav>
+    <div class="logo"><span class="x">X</span>parkling Touch</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why us</a>
+      <a href="#visit">Book</a>
     </div>
-  </header>
+    <a class="nav-cta wa-book" href="#" data-service="an appointment">Book now</a>
+  </nav>
+</header>
 
-  <section>
-    <h2>Our Services</h2>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Unisex salon &mdash; cuts, color, grooming</div>
+    <h1>Every cut, <span class="shimmer">sharp on point.</span></h1>
+    <p class="sub">Xparkling Touch is a unisex salon built for precision styling &mdash; one chair, one stylist, full attention. No upsell, no rush, just the cut you asked for.</p>
+    <div class="hero-actions">
+      <a class="btn-primary wa-book" href="#" data-service="an appointment">Book an appointment</a>
+      <a class="btn-ghost" href="#services">View services</a>
+    </div>
+    <div class="hero-stats">
+      <div><strong>12</strong><span>Years cutting</span></div>
+      <div><strong>6</strong><span>Chairs, 6 stylists</span></div>
+      <div><strong>7</strong><span>Days open</span></div>
+    </div>
+  </div>
+</section>
 
-    <div class="services">
-      <div class="card">
-        <h3>Hair Styling</h3>
-        <p>Professional hair styling and grooming.</p>
+<div class="snip-divider">
+  <div class="snip-line"></div>
+  <div class="snip-icon">
+    <svg viewBox="0 0 24 24"><path d="M9 9L20 20M20 4L9 15M9 9a3 3 0 11-4.24 4.24M9 15a3 3 0 10-4.24-4.24"/></svg>
+  </div>
+  <div class="snip-line"></div>
+</div>
+
+<div class="wrap">
+  <section id="services" class="fade-in">
+    <div class="services-head">
+      <div class="section-label">On the menu</div>
+      <h2>Services &amp; pricing</h2>
+    </div>
+    <div class="service-cols">
+      <div class="service-col">
+        <h3>Cuts</h3>
+        <div class="service-item wa-book" data-service="Women's cut &amp; style ($65)"><span class="name">Women's cut &amp; style</span><span class="leader"></span><span class="price">$65</span></div>
+        <div class="service-item wa-book" data-service="Men's cut ($35)"><span class="name">Men's cut</span><span class="leader"></span><span class="price">$35</span></div>
+        <div class="service-item wa-book" data-service="Kids' cut ($25)"><span class="name">Kids' cut (under 12)</span><span class="leader"></span><span class="price">$25</span></div>
+        <div class="service-item wa-book" data-service="Beard trim &amp; shape ($20)"><span class="name">Beard trim &amp; shape</span><span class="leader"></span><span class="price">$20</span></div>
+        <div class="service-item wa-book" data-service="Fade / clipper cut ($40)"><span class="name">Fade / clipper cut</span><span class="leader"></span><span class="price">$40</span></div>
       </div>
-
-      <div class="card">
-        <h3>Barbing</h3>
-        <p>Clean and stylish cuts for every look.</p>
-      </div>
-
-      <div class="card">
-        <h3>Hair Treatment</h3>
-        <p>Quality hair care and treatment services.</p>
-      </div>
-
-      <div class="card">
-        <h3>Beauty Services</h3>
-        <p>Beauty and grooming services for our clients.</p>
+      <div class="service-col">
+        <h3>Color &amp; treatment</h3>
+        <div class="service-item wa-book" data-service="Full color ($95+)"><span class="name">Full color</span><span class="leader"></span><span class="price">$95+</span></div>
+        <div class="service-item wa-book" data-service="Balayage ($140+)"><span class="name">Balayage</span><span class="leader"></span><span class="price">$140+</span></div>
+        <div class="service-item wa-book" data-service="Root touch-up ($60)"><span class="name">Root touch-up</span><span class="leader"></span><span class="price">$60</span></div>
+        <div class="service-item wa-book" data-service="Deep conditioning ($30)"><span class="name">Deep conditioning</span><span class="leader"></span><span class="price">$30</span></div>
+        <div class="service-item wa-book" data-service="Blowout &amp; style ($45)"><span class="name">Blowout &amp; style</span><span class="leader"></span><span class="price">$45</span></div>
       </div>
     </div>
   </section>
+</div>
 
-  <a href="https://wa.me/2349035458488" target="_blank">Contact Us</a>
-    <h2>Visit Us</h2>
-    <p>Benin City, Edo State</p>
-    <br>   
-    </a>
+<section id="why" class="strip fade-in">
+  <div class="wrap">
+    <div class="section-label">Why Xparkling Touch</div>
+    <div class="strip-grid" style="margin-top:32px;">
+      <div class="strip-item">
+        <div class="num">01</div>
+        <h4>One stylist, start to finish</h4>
+        <p>You keep the same stylist for the whole appointment &mdash; no handoffs between cut, color, and wash.</p>
+      </div>
+      <div class="strip-item">
+        <div class="num">02</div>
+        <h4>Walk-ins welcome</h4>
+        <p>Book ahead or drop in &mdash; six chairs mean short waits even on weekends.</p>
+      </div>
+      <div class="strip-item">
+        <div class="num">03</div>
+        <h4>Cut for every texture</h4>
+        <p>Our stylists train across textures and lengths, from tight fades to long layers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section id="visit" class="fade-in">
+    <div class="section-label">Find us</div>
+    <div class="visit-grid" style="margin-top:14px;">
+      <div class="visit-block">
+        <h3>Address</h3>
+        <p>28 Marigold Road<br>Bengaluru, Karnataka</p>
+        <p class="muted">Ground floor, next to City Bakery</p>
+      </div>
+      <div class="visit-block">
+        <h3>Hours</h3>
+        <p>Mon&ndash;Sat&nbsp; 10:00&ndash;20:00<br>Sun&nbsp; 11:00&ndash;18:00</p>
+        <p class="muted">Last appointment 1hr before close</p>
+      </div>
+      <div class="visit-block">
+        <h3>Contact</h3>
+        <p>hello@xparklingtouch.com<br><a class="wa-book" href="#" data-service="an appointment" style="border-bottom:1px dotted var(--champagne);">+234 903 545 8488 (WhatsApp)</a></p>
+        <p class="muted">Walk-ins welcome, booking recommended</p>
+      </div>
+    </div>
   </section>
+</div>
 
-  <footer>
-    © 2026 Xparkling Touch Unisex Salon
-  </footer>
-  
+<footer>
+  <span class="logo"><span class="x" style="color:var(--champagne-bright)">X</span>parkling Touch</span>
+  <span>&copy; 2026 Xparkling Touch Unisex Salon</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // WhatsApp booking
+  const WHATSAPP_NUMBER = '2349035458488'; // no + or leading zeros
+  document.querySelectorAll('.wa-book').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const service = el.getAttribute('data-service') || 'an appointment';
+      const message = `Hi Xparkling Touch! I'd like to book ${service}. Please let me know your next available slot.`;
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    });
+  });
+</script>
+
 </body>
 </html>
